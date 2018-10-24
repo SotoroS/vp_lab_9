@@ -19,5 +19,14 @@
             this.leftTop = leftTop;
             this.rightDown = rightDown;
         }
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        public Region()
+        {
+            this.leftTop = new Point(0, 0);
+            this.rightDown = new Point(0, 0);
+        }
     }
 }

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 
 namespace vp_lab_9
@@ -43,64 +40,58 @@ namespace vp_lab_9
         }
 
         /// <summary>
-        /// Получение региона максимальной матрицы
+        /// Поиск региона с максимальной суммой элементов в матрице
         /// </summary>
-        /// <returns></returns>
-        public double FindMaxRegion(int a, int b)
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        public void FindMaxRegion(int a, int b)
         {
+            // Массив сумм всех регионов
             double[,] sum;
-            double max = 0;
 
-            if (n < m)
+            // Искомый регион
+            Region maxRegion = new Region();
+
+            // Инициализация размера массива
+            sum = new double[n - a + 1, m - b + 1];
+
+            // Просчет всех сумм элементов всех регионов
+            for (int i = 0; i < n - a + 1; i++)
             {
-                sum = new double[m - b + 1, n - a + 1];
-
-                for (int i = 0; i < m - b; i++)
+                for (int j = 0; j < m - b + 1; j++)
                 {
-                    for (int j = 0; j < n - a; j++)
+                    for (int x = i; x < i + a; x++)
                     {
-                        for (int x = i; x < i + b; x++)
+                        for (int y = j; y < j + b; y++)
                         {
-                            for (int y = j; y < j + a; y++)
-                            {
-                                sum[i, j] += array[x, y];
-                            }
+                            sum[i, j] += array[x, y];
                         }
-
-                        OnSelectedRegion(new Region(new Point(i, j), new Point(i + b, j + a)));
-
-                        Thread.Sleep(100);
                     }
+
+                    // Сообщаем о используемом регионне в данный момент
+                    OnSelectedRegion(new Region(new Point(i, j), new Point(i + a, j + b)));
+
+                    Thread.Sleep(100);
                 }
             }
-            else
+
+            // Инициализация максимального значения
+            double max = sum[0, 0];
+
+            // Поиск региона с максимальной суммой элементов региона
+            for (int x = 1; x < n - a + 1; x++)
             {
-                sum = new double[n - a + 1, m - b + 1];
-
-                for (int i = 0; i < n - a; i++)
+                for (int y = 1; y < m - b + 1; y++)
                 {
-                    for (int j = 0; j < m - b; j++)
+                    if (max < sum[x, y])
                     {
-                        for (int x = i; x < i + a; x++)
-                        {
-                            for (int y = j; y < j + b; y++)
-                            {
-                                sum[i, j] += array[x, y];
-                            }
-                        }
-
-                        OnSelectedRegion(new Region(new Point(i, j), new Point(i + a, j + b)));
-
-                        Thread.Sleep(100);
-
+                        max = sum[x, y];
+                        maxRegion = new Region(new Point(x, y), new Point(x + a, y + b));
                     }
                 }
             }
 
-            foreach (double el in sum)
-                max = (el > max) ? el : max;
-
-            return max;
+            OnFinishedFindMaxRegion(maxRegion);
         }
 
         /// <summary>
@@ -114,8 +105,23 @@ namespace vp_lab_9
         }
 
         /// <summary>
+        /// Обертка для события завершения поиска 
+        /// региона с максимальной суммой элементов
+        /// </summary>
+        /// <param name="region"></param>
+        public void OnFinishedFindMaxRegion(object region)
+        {
+            if (FinishedFindMaxRegion != null) FinishedFindMaxRegion((Region)region);
+        }
+
+        /// <summary>
         /// Событие выбора региона
         /// </summary>
         public event Action<Region> SelectedRegion;
+
+        /// <summary>
+        /// Событие завершения поиска региона с максимальной суммой элементов
+        /// </summary>
+        public event Action<Region> FinishedFindMaxRegion;
     }
 }

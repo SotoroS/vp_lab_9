@@ -1,6 +1,6 @@
 ﻿namespace vp_lab_9
 {
-    partial class Main
+    partial class Form1
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -48,6 +48,7 @@
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.Size = new System.Drawing.Size(633, 426);
             this.dataGridView.TabIndex = 0;
+            this.dataGridView.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView_CellMouseClick);
             // 
             // label1
             // 
@@ -123,7 +124,7 @@
             this.buttonSearch.UseVisualStyleBackColor = true;
             this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
-            // Main
+            // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -138,7 +139,7 @@
             this.Controls.Add(this.tbN);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView);
-            this.Name = "Main";
+            this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
