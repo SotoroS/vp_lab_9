@@ -7,8 +7,14 @@ namespace vp_lab_9
 {
     public partial class Form1 : Form
     {
+        // Матрица
         Matrix matrix;
-        int a = 0, b = 0, n = 0, m = 0;
+
+        // Поток
+        Thread thread;
+
+        // Размеры матриц
+        int a = 0, b = 0, n = 0, m = 0, s = 0;
 
         public Form1()
         {
@@ -26,22 +32,35 @@ namespace vp_lab_9
             dataGridView.DefaultCellStyle.SelectionBackColor = SystemColors.Highlight;
         }
 
+        /// <summary>
+        /// Поиск региона с максимальной суммой элементов в матрице
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonSearch_Click(object sender, EventArgs e)
         {
+            // Останавливаем предыдущий поток, если он существует
+            if (thread != null) thread.Abort();
+
+            // Меняем цвет выделения ячейки на цвет по-умолчанию
+            dataGridView.DefaultCellStyle.SelectionBackColor = SystemColors.Highlight;
+
             // Считываем значения полей формы
             int.TryParse(tbA.Text, out a);
             int.TryParse(tbB.Text, out b);
             int.TryParse(tbN.Text, out n);
             int.TryParse(tbM.Text, out m);
+            int.TryParse(tbS.Text, out s);
 
-            if (n < 1 || m < 1 || a < 1 || b < 1 || a > n || b > m)
+            // проверка на корректность введенных данных
+            if (n < 1 || m < 1 || a < 1 || b < 1 || a > n || b > m || s < 0)
             {
                 MessageBox.Show("Проверте правильность заполнения полей.", "Ошибка");
                 return;
             }
 
             // Формируем матрицу
-            matrix = new Matrix(n, m);
+            matrix = new Matrix(n, m, s);
             matrix.SetRandomValue();
 
             // Подписываемся на событие "Выделение региона"
@@ -59,7 +78,8 @@ namespace vp_lab_9
                 for (int j = 0; j < m; j++)
                     dataGridView.Rows[i].Cells[j].Value = matrix.array[i, j];
 
-            Thread thread = new Thread(()=>matrix.FindMaxRegion(a, b));
+            // Инициализируем и запускаем поток для поиска региона с макимальной суммой элементов
+            thread = new Thread(()=>matrix.FindMaxRegion(a, b));
             thread.Start();
         }
 

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.tbN = new System.Windows.Forms.TextBox();
@@ -38,6 +39,8 @@
             this.tbB = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.buttonSearch = new System.Windows.Forms.Button();
+            this.tbS = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -116,7 +119,7 @@
             // 
             // buttonSearch
             // 
-            this.buttonSearch.Location = new System.Drawing.Point(17, 116);
+            this.buttonSearch.Location = new System.Drawing.Point(17, 142);
             this.buttonSearch.Name = "buttonSearch";
             this.buttonSearch.Size = new System.Drawing.Size(121, 23);
             this.buttonSearch.TabIndex = 9;
@@ -124,11 +127,29 @@
             this.buttonSearch.UseVisualStyleBackColor = true;
             this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
+            // tbS
+            // 
+            this.tbS.Location = new System.Drawing.Point(38, 116);
+            this.tbS.Name = "tbS";
+            this.tbS.Size = new System.Drawing.Size(100, 20);
+            this.tbS.TabIndex = 11;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(14, 119);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(17, 13);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "S:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.tbS);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.buttonSearch);
             this.Controls.Add(this.tbB);
             this.Controls.Add(this.label4);
@@ -139,8 +160,9 @@
             this.Controls.Add(this.tbN);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Matrix in matrix";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -159,6 +181,8 @@
         private System.Windows.Forms.TextBox tbB;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button buttonSearch;
+        private System.Windows.Forms.TextBox tbS;
+        private System.Windows.Forms.Label label5;
     }
 }
 
