@@ -38,7 +38,8 @@ namespace vp_lab_9
 
             for (int i = 0; i < n; i++)
                 for (int j = 0; j < m; j++)
-                    array[i, j] = random.Next(-100, 100);
+                    //array[i, j] = random.Next(-100, 100);
+                    array[i, j] = random.Next(-1, 2);
                     //array[i, j] = random.NextDouble() * random.Next(-100, 100);
                     //array[i, j] = random.Next(0, 2);
         }
@@ -46,59 +47,78 @@ namespace vp_lab_9
         /// <summary>
         /// Поиск региона с максимальной суммой элементов в матрице
         /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        public void FindMaxRegion(int a, int b)
+        public void FindMaxRegion()
         {
             try
             {
-                // Массив сумм всех регионов
-                double[,] sum;
+                // Область с максимальной суммой элементов
+                Region maxRegion = new Region(0, 0, 1, 1, array[0, 0] + array[0, 1] + array[1, 0] + array[1, 1]);
 
-                // Искомый регион
-                Region maxRegion = new Region();
-
-                // Инициализация размера массива
-                sum = new double[n - a + 1, m - b + 1];
-
-                // Просчет всех сумм элементов всех регионов
-                for (int i = 0; i < n - a + 1; i++)
+                // Проходимся по всем элементам матрицы
+                // Координаты текущего элемента - i, j
+                //
+                //      +---------------+
+                //      |               |
+                //      |    *          |
+                //      |     (i,j)     |
+                //      |               |
+                //      |               |
+                //      +---------------+
+                //
+                for (int i = 0; i < n; i++)
                 {
-                    for (int j = 0; j < m - b + 1; j++)
+                    for (int j = 0; j < m; j++)
                     {
-                        for (int x = i; x < i + a; x++)
+
+                        // Проходимся по все возможным областям
+                        // за счет изменения размера исследуемой области (a, b)
+                        //
+                        // За минимальную область считаем квадратную матрицу 2x2
+                        // a = i + 1; b = j + 1; 
+                        //
+                        //      +---------------+
+                        //      |  (i,j)        |
+                        //      |    *---+      |
+                        //      |    |   |      |
+                        //      |    +---+      |
+                        //      |        (a,b)  |
+                        //      +---------------+
+                        //
+                        for (int a = i; a <= n; a++)
                         {
-                            for (int y = j; y < j + b; y++)
+                            for (int b = j; b <= m; b++)
                             {
-                                sum[i, j] += array[x, y];
+
+                                // Переменная для хранения суммы элементов исследуемой области
+                                double sum = 0;
+
+                                // Проходимся по всем элементам исследуемой области
+                                // и вычисляем их сумму
+                                for (int x = i; x < a; x++)
+                                {
+                                    for (int y = j; y < b; y++)
+                                    {
+                                        sum += array[x, y];
+                                    }
+                                }
+
+                                // Если сумма элементов исследуемой области
+                                // больше в области с максимальной суммой элементов
+                                // Переназначаем область
+                                if (maxRegion.Sum < sum) maxRegion = new Region(i, j, a, b, sum);
+
+                                // Сообщаем о регионне с максимальной суммой элементов на данный момент
+                                OnSelectedRegion(new Region(i, j, a, b));
+
+                                // Задержка
+                                Thread.Sleep(s);
+
                             }
                         }
-
-                        // Сообщаем о используемом регионне в данный момент
-                        OnSelectedRegion(new Region(new Point(i, j), new Point(i + a, j + b)));
-
-                        Thread.Sleep(s);
                     }
                 }
 
-                maxRegion = new Region(new Point(0, 0), new Point(a, b));
-
-                // Инициализация максимального значения
-                double max = sum[0, 0];
-
-                // Поиск региона с максимальной суммой элементов региона
-                for (int x = 1; x < n - a + 1; x++)
-                {
-                    for (int y = 1; y < m - b + 1; y++)
-                    {
-                        if (max < sum[x, y])
-                        {
-                            max = sum[x, y];
-                            maxRegion = new Region(new Point(x, y), new Point(x + a, y + b));
-                        }
-                    }
-                }
-
+                // Сообщаем о найденом регионе с максимальной суммой элементов
                 OnFinishedFindMaxRegion(maxRegion);
             }
             catch (ThreadAbortException e)
@@ -109,7 +129,6 @@ namespace vp_lab_9
             {
                 return;
             }
-            
         }
 
         /// <summary>

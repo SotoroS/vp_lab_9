@@ -34,10 +34,6 @@
             this.tbN = new System.Windows.Forms.TextBox();
             this.tbM = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.tbA = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.tbB = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.tbS = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -68,6 +64,7 @@
             this.tbN.Name = "tbN";
             this.tbN.Size = new System.Drawing.Size(100, 20);
             this.tbN.TabIndex = 2;
+            this.tbN.Text = "5";
             // 
             // tbM
             // 
@@ -75,6 +72,7 @@
             this.tbM.Name = "tbM";
             this.tbM.Size = new System.Drawing.Size(100, 20);
             this.tbM.TabIndex = 4;
+            this.tbM.Text = "5";
             // 
             // label2
             // 
@@ -85,41 +83,9 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "M:";
             // 
-            // tbA
-            // 
-            this.tbA.Location = new System.Drawing.Point(38, 64);
-            this.tbA.Name = "tbA";
-            this.tbA.Size = new System.Drawing.Size(100, 20);
-            this.tbA.TabIndex = 6;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 67);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(17, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "A:";
-            // 
-            // tbB
-            // 
-            this.tbB.Location = new System.Drawing.Point(38, 90);
-            this.tbB.Name = "tbB";
-            this.tbB.Size = new System.Drawing.Size(100, 20);
-            this.tbB.TabIndex = 8;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 93);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(17, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "B:";
-            // 
             // buttonSearch
             // 
-            this.buttonSearch.Location = new System.Drawing.Point(17, 142);
+            this.buttonSearch.Location = new System.Drawing.Point(17, 90);
             this.buttonSearch.Name = "buttonSearch";
             this.buttonSearch.Size = new System.Drawing.Size(121, 23);
             this.buttonSearch.TabIndex = 9;
@@ -129,15 +95,16 @@
             // 
             // tbS
             // 
-            this.tbS.Location = new System.Drawing.Point(38, 116);
+            this.tbS.Location = new System.Drawing.Point(38, 64);
             this.tbS.Name = "tbS";
             this.tbS.Size = new System.Drawing.Size(100, 20);
             this.tbS.TabIndex = 11;
+            this.tbS.Text = "100";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(14, 119);
+            this.label5.Location = new System.Drawing.Point(14, 67);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(17, 13);
             this.label5.TabIndex = 10;
@@ -151,10 +118,6 @@
             this.Controls.Add(this.tbS);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.buttonSearch);
-            this.Controls.Add(this.tbB);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.tbA);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.tbM);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tbN);
@@ -176,10 +139,6 @@
         private System.Windows.Forms.TextBox tbN;
         private System.Windows.Forms.TextBox tbM;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox tbA;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox tbB;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.TextBox tbS;
         private System.Windows.Forms.Label label5;

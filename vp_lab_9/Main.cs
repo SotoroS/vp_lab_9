@@ -46,14 +46,12 @@ namespace vp_lab_9
             dataGridView.DefaultCellStyle.SelectionBackColor = SystemColors.Highlight;
 
             // Считываем значения полей формы
-            int.TryParse(tbA.Text, out a);
-            int.TryParse(tbB.Text, out b);
             int.TryParse(tbN.Text, out n);
             int.TryParse(tbM.Text, out m);
             int.TryParse(tbS.Text, out s);
 
             // проверка на корректность введенных данных
-            if (n < 1 || m < 1 || a < 1 || b < 1 || a > n || b > m || s < 0)
+            if (n < 1 || m < 1 || s < 0)
             {
                 MessageBox.Show("Проверте правильность заполнения полей.", "Ошибка");
                 return;
@@ -79,7 +77,7 @@ namespace vp_lab_9
                     dataGridView.Rows[i].Cells[j].Value = matrix.array[i, j];
 
             // Инициализируем и запускаем поток для поиска региона с макимальной суммой элементов
-            thread = new Thread(()=>matrix.FindMaxRegion(a, b));
+            thread = new Thread(()=>matrix.FindMaxRegion());
             thread.Start();
         }
 
